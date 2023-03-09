@@ -9,79 +9,68 @@ import java.util.Date;
  */
 
 @Entity
-@Table(name = "report")
+@Table(name = "artifact")
 public class Artifact implements Serializable {
     private static final long serialVersionUID = 338L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int rid;
+    private int oid;
 
-    @Column(name = "rname", nullable = false)
-    private String rname;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    //The foreign key of the project
-    @Column(name = "pid", nullable = false)
-    private int pid;
+    @Column(name = "url")
+    private String url;
 
-    @Column(name = "date", nullable = false)
+    @Column(name = "date")
     private Date date;
 
-    //Humidity is a percent
-    @Column(name = "humidity")
-    private double humidity;
+    @Column(name = "description")
+    private String description;
 
-    @Column(name = "weather")
-    private String weather;
+    @Column(name = "people")
+    private String people;
 
-    @Column(name = "siteConditions")
-    private String siteConditions;
+    @Column(name = "subject")
+    private String subjects;
 
-    @Column(name = "toDo")
-    private String toDo;
+    @Column(name = "dimensions")
+    private String dimensions;
 
-    @Column(name = "obstacles")
-    private String obstacles;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "notes")
-    private String notes;
+    @Column(name = "photographer")
+    private String photographer;
 
-    @Column(name = "nextDayPlan")
-    private String nextDayPlan;
+    @Column(name = "studio")
+    private String studio;
 
-    @Column(name = "creatorUid", nullable = false)
-    private int creatorUid;
+    @Column(name = "numberOfImages", nullable = false)
+    private int numberOfImages;
 
-    @Column(name = "supervisorUid")
-    private int supervisorUid;
+    public int getOid() { return oid; }
 
-    public int getRid() { return rid; }
+    public String getUrl() { return url; }
 
-    public String getRName() { return rname; }
-
-    public int getPid() { return pid; }
+    public String getName() { return name; }
 
     public Date getDate() { return date; }
 
-    public double getHumidity() { return humidity; }
+    public String getDesc() { return description; }
 
-    public String getWeather() { return weather; }
+    public String getPeople() { return people; }
 
-    public String getSiteConditions() { return siteConditions; }
+    public String getDimensions() { return dimensions; }
 
-    public String getToDo() { return toDo; }
+    public String getTitle() { return title; }
 
-    public String getObstacles() { return obstacles; }
+    public String getPhotographer() { return photographer; }
 
-    public String getNotes() { return notes; }
+    public String getStudio() { return studio; }
 
-    public String getNextDayPlan() { return nextDayPlan; }
-
-    public int getCreatorUid() {
-        return creatorUid;
-    }
-
-    public int getSupervisorUid() {
-        return supervisorUid;
+    public int getNumberOfImages() {
+        return numberOfImages;
     }
 }

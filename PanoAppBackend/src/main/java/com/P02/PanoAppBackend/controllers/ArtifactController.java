@@ -19,16 +19,16 @@ public class ArtifactController {
     private ArtifactDAO artifactDAO;
 
     @Autowired
-    public void setReportDao(@Qualifier("Reports") ReportDao reportDao) {
-        this.reportDao = reportDao;
+    public void setArtifact(@Qualifier("Artifacts") ArtifactDAO artifactDAO) {
+        this.artifactDAO = artifactDAO;
     }
 
-    @DeleteMapping(path = "{objectid}")
-    public void deleteReport(@PathVariable("objectid") int oid) {
-        Optional<Artifact> optionalArtifact = ArtifactDAO.getArtifactByOid(oid);
+    @DeleteMapping(path = "{oid}")
+    public void deleteArtifact(@PathVariable("oid") int oid) {
+        Optional<Artifact> optionalArtifact = artifactDAO.getArtifactByOid(oid);
         if (optionalArtifact.isPresent()) {
             Artifact artifact = optionalArtifact.get();
-            if (!ArtifactDAO.deleteArtifact(artifact)) {
+            if (!artifactDAO.deleteArtifact(artifact)) {
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Report Could Not Be Deleted");
             }
         } else {
@@ -38,13 +38,13 @@ public class ArtifactController {
 
     @PostMapping
     @ResponseBody
-    public int addReport(@RequestBody Report report) {
-        if (!reportDao.addReport(report)) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Report Could Not Be Added");
+    public int addArtifact(@RequestBody Artifact artifact) {
+        if (!artifactDAO.addArtifact(artifact)) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Artifact Could Not Be Added");
         }
-        return report.getRid();
+        return artifact.getOid();
     }
-
+/*
     @PostMapping(path = "subtrade")
     public void addSubtrade(@RequestParam(value = "rid") int rid, @RequestParam("name") String name) {
         if (!reportDao.addSubtrade(rid, name)) {
@@ -137,5 +137,5 @@ public class ArtifactController {
         public int compare(Report a, Report b) {
             return b.getDate().compareTo(a.getDate());
         }
-    }
+    }*/
 }
