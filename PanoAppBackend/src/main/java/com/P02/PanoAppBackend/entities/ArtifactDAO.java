@@ -70,6 +70,21 @@ public class ArtifactDAO {
         }
         return deleted;
     }
+
+    public List<String> getArtifactNames(int oid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        Query query = em.createNativeQuery("SELECT name FROM artifact WHERE artifact.oid=?")
+                .setParameter(1, oid);
+        List<String> artifacts = Collections.emptyList();
+        try{
+            artifacts = query.getResultList();
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return artifacts;
+    }
 /*
     public List<Report> getProjectReports(int pid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();

@@ -44,6 +44,11 @@ public class ArtifactController {
         }
         return artifact.getOid();
     }
+
+    @GetMapping(path = "getName")
+    public List<String> getArtifactNames(@RequestParam(value = "oid") int oid) {
+        return artifactDAO.getArtifactNames(oid);
+    }
 /*
     @PostMapping(path = "subtrade")
     public void addSubtrade(@RequestParam(value = "rid") int rid, @RequestParam("name") String name) {
