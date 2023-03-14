@@ -70,19 +70,4 @@ public class UserDAO
         }
         return deleted;
     }
-
-    public List<String> getUserNames(int uid) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        Query query = em.createNativeQuery("SELECT username FROM user WHERE user.uid=?")
-                .setParameter(1, uid);
-        List<String> users = Collections.emptyList();
-        try{
-            users = query.getResultList();
-        } catch (NoResultException exception) {
-            exception.printStackTrace();
-        } finally {
-            em.close();
-        }
-        return users;
-    }
 }

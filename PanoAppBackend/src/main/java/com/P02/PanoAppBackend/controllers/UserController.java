@@ -20,25 +20,30 @@ public class UserController
         this.userDAO = userDAO;
     }
 
-    @DeleteMapping(path = "{oid}")
-    public void deleteArtifact(@PathVariable("oid") int uid) {
+    @DeleteMapping(path = "{uid}")
+    public void deleteUser(@PathVariable("uid") int uid) {
         Optional<User> optionalArtifact = userDAO.getUserByUid(uid);
         if (optionalArtifact.isPresent()) {
             User artifact = optionalArtifact.get();
             if (!userDAO.deleteUser(artifact)) {
-                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Report Could Not Be Deleted");
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "User Could Not Be Deleted");
             }
         } else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Report Not Found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Not Found");
         }
     }
 
     @PostMapping
     @ResponseBody
-    public int addArtifact(@RequestBody User user) {
+    public int addUser(@RequestBody User user) {
         if (!userDAO.addUser(user)) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Artifact Could Not Be Added");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "User Could Not Be Added");
         }
         return user.getUid();
+    }
+
+    @GetMapping(path = "get")
+    public Optional<User> getUsers(@RequestParam(value = "uid") int uid) {
+        return userDAO.getUserByUid(uid);
     }
 }
