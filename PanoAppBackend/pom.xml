@@ -14,7 +14,7 @@
 	<name>PanoAppBackend</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>13</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
         <dependency>
@@ -89,7 +89,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>12</source>
+                    <target>12</target>
+                </configuration>
+            </plugin>
+        </plugins>
 	</build>
 
 </project>
