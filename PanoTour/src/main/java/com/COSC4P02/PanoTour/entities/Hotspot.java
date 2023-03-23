@@ -27,7 +27,7 @@ public class Hotspot implements Serializable
     @Column(name= "z", nullable = false)
     private int z;
 
-    public int getOid{return oid;}
+    public int getOid(){return oid;}
     public int getSid() {return sid;}
     public int getX() { return x; }
     public int getY() { return y; }

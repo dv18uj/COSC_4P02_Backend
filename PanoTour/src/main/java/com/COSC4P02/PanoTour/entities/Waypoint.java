@@ -27,7 +27,7 @@ public class Waypoint implements Serializable
     @Column(name= "z", nullable = false)
     private int z;
 
-    public int getPid{return pid;}
+    public int getPid(){return pid;}
     public int getSid() {return sid;}
     public int getX() { return x; }
     public int getY() { return y; }
