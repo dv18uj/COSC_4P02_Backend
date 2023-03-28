@@ -1,4 +1,4 @@
-package com.P02.PanoTour.entities;
+package com.COSC4P02.PanoTour.entities;
 
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +31,22 @@ public class HotspotDAO
             em.close();
         }
         return persisted;
+    }
+    public Optional<Hotspot> getHotspotByOid(int oid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT h FROM Hotspot h WHERE h.oid = :OID";
+        TypedQuery<Hotspot> tq = em.createQuery(query, Hotspot.class);
+        tq.setParameter("OID", oid);
+
+        Optional<Hotspot> hotspot = Optional.empty();
+        try {
+            hotspot = Optional.of(tq.getSingleResult());
+        } catch (NoResultException exception) {
+            /*exception.printStackTrace();*/
+        } finally {
+            em.close();
+        }
+        return hotspot;
     }
     public boolean deleteHotspot(Hotspot hotspot) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();

@@ -1,4 +1,4 @@
-package com.P02.PanoTour.entities;
+package com.COSC4P02.PanoTour.entities;
 
 import org.springframework.stereotype.Repository;
 
@@ -31,6 +31,22 @@ public class WaypointDAO
             em.close();
         }
         return persisted;
+    }
+    public Optional<Waypoint> getWaypointByPid(int pid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT w FROM Waypoint w WHERE w.pid = :PID";
+        TypedQuery<Waypoint> tq = em.createQuery(query, Waypoint.class);
+        tq.setParameter("PID", pid);
+
+        Optional<Waypoint> waypoint = Optional.empty();
+        try {
+            waypoint = Optional.of(tq.getSingleResult());
+        } catch (NoResultException exception) {
+            /*exception.printStackTrace();*/
+        } finally {
+            em.close();
+        }
+        return waypoint;
     }
     public boolean deleteWaypoint(Waypoint waypoint) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
