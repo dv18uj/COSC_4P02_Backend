@@ -23,7 +23,7 @@ public class Section implements Serializable
     @Column(name = "lid")
     private int lid;
 
-    public int getUid() { return sid; }
+    public int getSid() { return sid; }
     public int getLid() { return lid; }
     public String getName() { return name; }
     public String getDescription() { return description; }

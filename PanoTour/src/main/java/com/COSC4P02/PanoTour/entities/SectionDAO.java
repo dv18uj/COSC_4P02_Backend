@@ -1,19 +1,16 @@
-//Sectionsdao
-
 package com.COSC4P02.PanoTour.entities;
 
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.List;
+
 import java.util.Optional;
 
 @Repository("Sections")
 public class SectionDAO
 {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("PanoApp");
+            .createEntityManagerFactory("PanoTour");
 
     public boolean addSection(Section section) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -35,11 +32,11 @@ public class SectionDAO
         return persisted;
     }
 
-    public Optional<Section> getSectionsByUid(int uid) {
+    public Optional<Section> getSectionBySid(int sid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT s FROM Sections s WHERE s.uid = :UID";
+        String query = "SELECT s FROM Section s WHERE s.uid = :UID";
         TypedQuery<Section> tq = em.createQuery(query, Section.class);
-        tq.setParameter("UID", uid);
+        tq.setParameter("SID", sid);
 
         Optional<Section> section = Optional.empty();
         try {
@@ -73,4 +70,3 @@ public class SectionDAO
         return deleted;
     }
 }
-
