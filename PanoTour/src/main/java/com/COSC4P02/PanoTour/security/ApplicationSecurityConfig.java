@@ -5,6 +5,8 @@ import com.COSC4P02.PanoTour.auth.ApplicationUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -40,60 +42,25 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http
-                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "index", "/css/*", "/js/*").permitAll()
-                .antMatchers("/api/**").hasRole(USER.name())
+                .antMatchers("/").permitAll()
+                .antMatchers("/api/user/**").hasRole(OWNER.name())
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
-                    .loginPage("/login")
-                    .permitAll()
-                    .defaultSuccessUrl("/courses", true)
-                    .passwordParameter("password")
-                    .usernameParameter("username")
-                .and()
-                .rememberMe()
-                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
-                    .key("somethingverysecured")
-                    .rememberMeParameter("remember-me")
-                .and()
-                .logout()
-                    .logoutUrl("/logout")
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET")) // https://docs.spring.io/spring-security/site/docs/4.2.12.RELEASE/apidocs/org/springframework/security/config/annotation/web/configurers/LogoutConfigurer.html
-                    .clearAuthentication(true)
-                    .invalidateHttpSession(true)
-                    .deleteCookies("JSESSIONID", "remember-me")
-                    .logoutSuccessUrl("/login");
+                .httpBasic();
     }
 
     @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
     @Bean
-    protected UserDetailsService userDetailsService()
-    {
-        UserDetails testUser = User.builder()
-                .username("test_user")
-                .password(passwordEncoder.encode("password"))
-                .authorities(USER.getGrantedAuthorities())
-                .build();
-
-        UserDetails testEmployee = User.builder()
-                .username("test_employee")
-                .password(passwordEncoder.encode("password"))
-                .authorities(EMPLOYEE.getGrantedAuthorities())
-                .build();
-
-        UserDetails testOwner = User.builder()
-                .username("test_owner")
-                .password(passwordEncoder.encode("password"))
-                .authorities(OWNER.getGrantedAuthorities())
-                .build();
-
-        return new InMemoryUserDetailsManager(
-                testUser,
-                testEmployee,
-                testOwner
-        );
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setUserDetailsService(applicationUserService);
+        return provider;
     }
 }

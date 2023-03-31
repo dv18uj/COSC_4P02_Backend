@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import static com.COSC4P02.PanoTour.security.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
-    USER(Sets.newHashSet()),
+    USER(Sets.newHashSet(MUSEUM_READ)),
     EMPLOYEE(Sets.newHashSet(MUSEUM_READ, MUSEUM_WRITE)),
     OWNER(Sets.newHashSet(MUSEUM_READ, MUSEUM_WRITE, USERS_READ, USERS_WRITE));
 
