@@ -3,6 +3,8 @@ package com.COSC4P02.PanoTour.entities;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Repository("Users")
@@ -48,6 +50,23 @@ public class UserDAO
         return user;
     }
 
+    public Optional<User> getUserByName(String name) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT u FROM User u WHERE u.name = :NAME";
+        TypedQuery<User> tq = em.createQuery(query, User.class);
+        tq.setParameter("NAME", name);
+
+        Optional<User> user = Optional.empty();
+        try {
+            user = Optional.of(tq.getSingleResult());
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return user;
+    }
+
     public boolean deleteUser(User user) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
@@ -67,5 +86,21 @@ public class UserDAO
             em.close();
         }
         return deleted;
+    }
+
+    public List<User> getAllUsers() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT u FROM User u WHERE u.uid IS NOT NULL";
+        TypedQuery<User> typedQuery = em.createQuery(query, User.class);
+        List<User> users = Collections.emptyList();
+
+        try{
+            users = typedQuery.getResultList();
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return users;
     }
 }
