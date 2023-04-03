@@ -1,19 +1,16 @@
-package com.P02.PanoAppBackend.entities;
+package com.COSC4P02.PanoTour.entities;
 
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-import java.util.Collections;
-import java.util.List;
+
 import java.util.Optional;
 
 @Repository("Sections")
-public class SectionsDAO
-{
+public class SectionDAO {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("PanoApp");
-
-    public boolean addSection(Sections section) {
+            .createEntityManagerFactory("PanoTour");
+    public boolean addSection(Section section) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean persisted = true;
@@ -33,13 +30,13 @@ public class SectionsDAO
         return persisted;
     }
 
-    public Optional<Sections> getSectionsByUid(int uid) {
+    public Optional<Section> getSectionBySid(int sid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT s FROM Sections s WHERE s.uid = :UID";
-        TypedQuery<Sections> tq = em.createQuery(query, Sections.class);
-        tq.setParameter("UID", uid);
+        String query = "SELECT s FROM Section s WHERE s.sid = :SID";
+        TypedQuery<Section> tq = em.createQuery(query, Section.class);
+        tq.setParameter("SID", sid);
 
-        Optional<Sections> section = Optional.empty();
+        Optional<Section> section = Optional.empty();
         try {
             section = Optional.of(tq.getSingleResult());
         } catch (NoResultException exception) {
@@ -50,7 +47,7 @@ public class SectionsDAO
         return section;
     }
 
-    public boolean deleteSection(Sections section) {
+    public boolean deleteSection(Section section) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean deleted = true;
