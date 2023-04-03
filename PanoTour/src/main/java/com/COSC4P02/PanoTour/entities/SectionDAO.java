@@ -7,11 +7,9 @@ import javax.persistence.*;
 import java.util.Optional;
 
 @Repository("Sections")
-public class SectionDAO
-{
+public class SectionDAO {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("PanoTour");
-
     public boolean addSection(Section section) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
@@ -34,7 +32,7 @@ public class SectionDAO
 
     public Optional<Section> getSectionBySid(int sid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT s FROM Section s WHERE s.uid = :UID";
+        String query = "SELECT s FROM Section s WHERE s.sid = :SID";
         TypedQuery<Section> tq = em.createQuery(query, Section.class);
         tq.setParameter("SID", sid);
 
