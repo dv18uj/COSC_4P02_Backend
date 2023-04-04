@@ -55,7 +55,7 @@ public class ApplicationUserDAOService implements ApplicationUserDAO {
         );
         userDao.getAllUsers().stream()
                 .map(user -> new ApplicationUser(
-                        OWNER.getGrantedAuthorities(),
+                        ApplicationUserRole.valueOf(user.getRole()).getGrantedAuthorities(),
                         user.getPassword(),
                         user.getName(),
                         true,
