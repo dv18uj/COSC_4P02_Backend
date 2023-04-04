@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5c1e555c-fa50-4c20-add6-7e1ab178de7d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/controllers/HotspotController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/controllers/WaypointController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/Hotspot.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/HotspotDAO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/Waypoint.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/WaypointDAO.java" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/controllers/HotspotController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/Hotspot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PanoTour/src/main/java/com/COSC4P02/PanoTour/entities/HotspotDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +19,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2NyVi1Joars6tDLBgo01YcBIUjz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
