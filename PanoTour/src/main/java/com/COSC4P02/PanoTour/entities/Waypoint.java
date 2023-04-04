@@ -1,9 +1,12 @@
+package com.COSC4P02.PanoTour.entities;
+
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "waypoint")
-public class Waypont implements Serializable
+public class Waypoint implements Serializable
 {
     private static final long serialVersionUID = 338L;
 
