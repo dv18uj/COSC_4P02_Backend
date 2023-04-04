@@ -1,4 +1,4 @@
-package com.P02.PanoAppBackend.entities;
+package com.COSC4P02.PanoTour.entities;
 
 import org.springframework.stereotype.Repository;
 
@@ -7,11 +7,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("Locations")
+@Repository("Location")
 public class LocationDAO
 {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("PanoApp");
+            .createEntityManagerFactory("PanoTour");
 
     public boolean addLocation(Location location) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -33,21 +33,20 @@ public class LocationDAO
         return persisted;
     }
 
-    public Optional<Location> getUserByUid(int uid) {
+    public List<Location> getAllLocations() {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT u FROM User u WHERE u.uid = :UID";
-        TypedQuery<User> tq = em.createQuery(query, User.class);
-        tq.setParameter("UID", uid);
+        String query = "SELECT u FROM Location u WHERE u.lid IS NOT NULL";
+        TypedQuery<Location> typedQuery = em.createQuery(query, Location.class);
+        List<Location> locations = Collections.emptyList();
 
-        Optional<User> user = Optional.empty();
-        try {
-            user = Optional.of(tq.getSingleResult());
+        try{
+            locations = typedQuery.getResultList();
         } catch (NoResultException exception) {
-            /*exception.printStackTrace();*/
+            exception.printStackTrace();
         } finally {
             em.close();
         }
-        return user;
+        return locations;
     }
 
     public boolean deleteUser(User user) {
