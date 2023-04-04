@@ -6,6 +6,7 @@ import com.COSC4P02.PanoTour.entities.SectionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -21,6 +22,7 @@ public class SectionController {
 
 
     @PostMapping
+    @PreAuthorize("hasAuthority('museum:write')")
     @ResponseBody
     public int addSection(@RequestBody Section section) {
         if (!sectionDAO.addSection(section)) {

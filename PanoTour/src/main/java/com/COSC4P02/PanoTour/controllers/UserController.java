@@ -24,6 +24,7 @@ public class UserController
     }
 
     @DeleteMapping(path = "{uid}")
+    @PreAuthorize("hasAuthority('users:write')")
     public void deleteUser(@PathVariable("uid") int uid) {
         Optional<User> optionalArtifact = userDAO.getUserByUid(uid);
         if (optionalArtifact.isPresent()) {
@@ -37,7 +38,7 @@ public class UserController
     }
 
     @PostMapping(path = "add")
-    @PreAuthorize("hasRole('ROLE_OWNER')")
+    @PreAuthorize("hasAuthority('users:write')")
     public void addUser(@RequestBody User user) {
         if (!userDAO.addUser(user)) {
             if (user.getName() == null || user.getPassword() == null ||  user.getRole() == null) {
@@ -51,6 +52,7 @@ public class UserController
     }
 
     @GetMapping(path = "get")
+    @PreAuthorize("hasAuthority('users:read')")
     public Optional<User> getUsers(@RequestParam(value = "uid") int uid) {
         return userDAO.getUserByUid(uid);
     }
