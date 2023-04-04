@@ -10,13 +10,15 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/section")
 public class SectionController {
     private SectionDAO sectionDAO;
 
     @Autowired
-    public void setSection(@Qualifier("Sections") SectionDAO sectionDAO) {
+    public void setSection(@Qualifier("SECTION") SectionDAO sectionDAO) {
         this.sectionDAO = sectionDAO;
     }
 
@@ -29,6 +31,12 @@ public class SectionController {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Artifact Could Not Be Added");
         }
         return section.getSid();
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('users:read')")
+    public Optional<Section> getSection(@RequestParam(value = "sid") int sid) {
+        return sectionDAO.getSectionBySid(sid);
     }
 
 }
