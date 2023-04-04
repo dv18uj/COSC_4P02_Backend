@@ -17,7 +17,7 @@ public class Location implements Serializable
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "img", nullable = false)
+    @Column(name = "image", nullable = false)
     private String img;
 
     public int getLid() { return lid; }
