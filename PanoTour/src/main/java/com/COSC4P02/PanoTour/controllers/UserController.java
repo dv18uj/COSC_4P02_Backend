@@ -2,9 +2,11 @@ package com.COSC4P02.PanoTour.controllers;
 
 import com.COSC4P02.PanoTour.entities.User;
 import com.COSC4P02.PanoTour.entities.UserDAO;
+import com.COSC4P02.PanoTour.security.ApplicationUserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -34,13 +36,18 @@ public class UserController
         }
     }
 
-    @PostMapping
-    @ResponseBody
-    public int addUser(@RequestBody User user) {
+    @PostMapping(path = "add")
+    @PreAuthorize("hasRole('ROLE_OWNER')")
+    public void addUser(@RequestBody User user) {
         if (!userDAO.addUser(user)) {
+            if (user.getName() == null || user.getPassword() == null ||  user.getRole() == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Properties Missing");
+            }
+            if (userDAO.getUserByName(user.getName()).isPresent()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User Already Exists");
+            }
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "User Could Not Be Added");
         }
-        return user.getUid();
     }
 
     @GetMapping(path = "get")
