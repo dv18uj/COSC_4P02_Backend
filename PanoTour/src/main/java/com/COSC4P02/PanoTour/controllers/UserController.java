@@ -13,6 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins="http:/localhost:3000")
 @RequestMapping("/api/user")
 public class UserController
 {
