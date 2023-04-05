@@ -13,7 +13,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins="http:/localhost:3000")
+@CrossOrigin(origins="http://localhost:19006")
 @RequestMapping("/api/user")
 public class UserController
 {
@@ -53,6 +53,7 @@ public class UserController
     }
 
     @GetMapping(path = "get")
+    @CrossOrigin(origins="http://localhost:19006")
     @PreAuthorize("hasAuthority('users:read')")
     public Optional<User> getUsers(@RequestParam(value = "uid") int uid) {
         return userDAO.getUserByUid(uid);
