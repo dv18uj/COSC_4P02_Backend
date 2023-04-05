@@ -52,9 +52,8 @@ public class UserController
         }
     }
 
-    @GetMapping(path = "get")
+    @GetMapping
     @CrossOrigin(origins="http://localhost:19006")
-    @PreAuthorize("hasAuthority('users:read')")
     public Optional<User> getUsers(@RequestParam(value = "uid") int uid) {
         return userDAO.getUserByUid(uid);
     }

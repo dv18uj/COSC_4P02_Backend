@@ -46,9 +46,14 @@ public class ArtifactController {
         return artifact.getOid();
     }
 
-    @GetMapping(path = "getName")
+    @GetMapping(path = "fromSID")
     @PreAuthorize("hasAuthority('museum:read')")
-    public List<String> getArtifactNames(@RequestParam(value = "oid") int oid) {
-        return artifactDAO.getArtifactNames(oid);
+    public List<Artifact> getArtifactsbySid(@RequestParam(value = "sid") int sid) {
+        return artifactDAO.getArtifactsBySid(sid);
+    }
+    @GetMapping
+    @PreAuthorize("hasAuthority('museum:read')")
+    public Optional<Artifact> getArtifactbyOid(@RequestParam(value = "oid") int oid) {
+        return artifactDAO.getArtifactByOid(oid);
     }
 }
