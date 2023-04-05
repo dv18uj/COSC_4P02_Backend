@@ -1,4 +1,4 @@
-package com.P02.PanoAppBackend.entities;
+package com.COSC4P02.PanoTour.entities;
 
 import org.springframework.stereotype.Repository;
 
@@ -7,13 +7,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("Locations")
+@Repository("Location")
 public class LocationDAO
 {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("PanoApp");
+            .createEntityManagerFactory("PanoTour");
 
-    public boolean addLocation(Location location) {
+    public static boolean addLocation(Location location) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean persisted = true;
@@ -33,24 +33,41 @@ public class LocationDAO
         return persisted;
     }
 
-    public Optional<Location> getUserByUid(int uid) {
+    public static Optional<Location> getLocationByLid(int lid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT u FROM User u WHERE u.uid = :UID";
-        TypedQuery<User> tq = em.createQuery(query, User.class);
-        tq.setParameter("UID", uid);
+        String query = "SELECT l FROM Location l WHERE l.lid = :LID";
+        TypedQuery<Location> tq = em.createQuery(query, Location.class);
+        tq.setParameter("LID", lid);
 
-        Optional<User> user = Optional.empty();
+        Optional<Location> location = Optional.empty();
         try {
-            user = Optional.of(tq.getSingleResult());
-        } catch (NoResultException exception) {
+            location = Optional.of(tq.getSingleResult());
+} catch (NoResultException exception) {
             /*exception.printStackTrace();*/
         } finally {
             em.close();
         }
-        return user;
+        return location;
     }
 
-    public boolean deleteUser(User user) {
+
+    public static List<Location> getAllLocations() {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT u FROM Location u WHERE u.lid IS NOT NULL";
+        TypedQuery<Location> typedQuery = em.createQuery(query, Location.class);
+        List<Location> locations = Collections.emptyList();
+
+        try{
+            locations = typedQuery.getResultList();
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return locations;
+    }
+
+    public static boolean deleteLocation(Location location) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean deleted = true;
@@ -58,7 +75,7 @@ public class LocationDAO
         try {
             entityTransaction = em.getTransaction();
             entityTransaction.begin();
-            em.remove(em.contains(user) ? user : em.merge(user));
+            em.remove(em.contains(location) ? location : em.merge(location));
             entityTransaction.commit();
         } catch (Exception e) {
             if (entityTransaction != null) {
