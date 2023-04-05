@@ -42,7 +42,7 @@ public class LocationDAO
         Optional<Location> location = Optional.empty();
         try {
             location = Optional.of(tq.getSingleResult());
-        } catch (NoResultException exception) {
+} catch (NoResultException exception) {
             /*exception.printStackTrace();*/
         } finally {
             em.close();

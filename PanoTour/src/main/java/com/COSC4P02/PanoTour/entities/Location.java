@@ -1,5 +1,6 @@
 package com.COSC4P02.PanoTour.entities;
 
+
 import javax.persistence.*;
 import java.io.Serializable;
 
