@@ -10,6 +10,7 @@ import java.util.Optional;
 public class SectionDAO {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("PanoTour");
+
     public boolean addSection(Section section) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;

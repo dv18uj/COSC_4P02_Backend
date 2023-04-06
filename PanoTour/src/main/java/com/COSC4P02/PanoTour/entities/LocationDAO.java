@@ -7,13 +7,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("Location")
+@Repository("Locations")
 public class LocationDAO
 {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("PanoTour");
 
-    public static boolean addLocation(Location location) {
+    public boolean addLocation(Location location) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean persisted = true;

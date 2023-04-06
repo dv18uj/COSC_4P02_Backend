@@ -14,14 +14,16 @@ public class Location implements Serializable
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int lid;
 
-
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "image", nullable = false)
-    private String img;
+    private String image;
 
     public int getLid() { return lid; }
+    public void setLid(int lid) { this.lid = lid; }
     public String getName() { return name; }
-    public String getImg() { return img; }
+    public void setName(String name) { this.name = name; }
+    public String getImage() { return image; }
+    public void setImage(String image) { this.image = image; }
 }
