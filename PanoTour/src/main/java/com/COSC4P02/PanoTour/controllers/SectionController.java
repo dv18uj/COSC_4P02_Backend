@@ -18,7 +18,7 @@ public class SectionController {
     private SectionDAO sectionDAO;
 
     @Autowired
-    public void setSection(@Qualifier("SECTION") SectionDAO sectionDAO) {
+    public void setSection(@Qualifier("Sections") SectionDAO sectionDAO) {
         this.sectionDAO = sectionDAO;
     }
 
@@ -28,7 +28,7 @@ public class SectionController {
     @ResponseBody
     public int addSection(@RequestBody Section section) {
         if (!sectionDAO.addSection(section)) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Artifact Could Not Be Added");
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Section Could Not Be Added");
         }
         return section.getSid();
     }

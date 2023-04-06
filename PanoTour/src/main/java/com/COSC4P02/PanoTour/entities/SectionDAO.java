@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 import java.util.Optional;
 
-@Repository("SECTION")
+@Repository("Sections")
 public class SectionDAO {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("PanoTour");

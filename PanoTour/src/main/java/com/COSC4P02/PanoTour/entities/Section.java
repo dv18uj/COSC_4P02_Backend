@@ -25,6 +25,9 @@ public class Section implements Serializable
 
     public int getSid() { return sid; }
     public int getLid() { return lid; }
+    public void setLid(int lid) { this.lid = lid; }
     public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
     public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }
