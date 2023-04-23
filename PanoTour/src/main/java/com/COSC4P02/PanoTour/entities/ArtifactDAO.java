@@ -49,6 +49,24 @@ public class ArtifactDAO {
         return artifact;
     }
 
+    public List<Artifact> getArtifactsBySid(int sid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT a FROM Artifact a WHERE a.sid = :SID";
+        TypedQuery<Artifact> tq = em.createQuery(query, Artifact.class);
+        tq.setParameter("SID", sid);
+
+        List<Artifact> artifacts = Collections.emptyList();
+
+        try{
+            artifacts = tq.getResultList();
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return artifacts;
+    }
+
     public boolean deleteArtifact(Artifact artifact) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;

@@ -32,7 +32,7 @@ public class Artifact implements Serializable {
     @Column(name = "people")
     private String people;
 
-    @Column(name = "subject")
+    @Column(name = "subjects")
     private String subjects;
 
     @Column(name = "dimensions")
@@ -47,7 +47,7 @@ public class Artifact implements Serializable {
     @Column(name = "studio")
     private String studio;
 
-    @Column(name = "numberOfImages", nullable = false)
+    @Column(name = "number_Images", nullable = false)
     private int numberOfImages;
 
     public int getOid() { return oid; }
