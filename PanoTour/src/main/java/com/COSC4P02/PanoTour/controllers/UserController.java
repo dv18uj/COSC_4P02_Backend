@@ -39,7 +39,7 @@ public class UserController
     }
 
     @PostMapping(path = "add")
-    @PreAuthorize("hasAuthority('users:write')")
+    @PreAuthorize("hasRole('ROLE_OWNER')")
     public void addUser(@RequestBody User user) {
         if (!userDAO.addUser(user)) {
             if (user.getName() == null || user.getPassword() == null ||  user.getRole() == null) {
