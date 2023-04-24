@@ -35,11 +35,12 @@ public class HotspotDAO {
     public static List<Hotspot> getHotspotsByPid(int pid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT u FROM Panoview u WHERE u.pid=:PID";
-        TypedQuery<Hotspot> typedQuery = em.createQuery(query, Hotspot.class);
+        TypedQuery<Hotspot> tq = em.createQuery(query, Hotspot.class);
+        tq.setParameter("PID", pid);
         List<Hotspot> hotspots = Collections.emptyList();
 
         try{
-            hotspots = typedQuery.getResultList();
+            hotspots = tq.getResultList();
         } catch (NoResultException exception) {
             exception.printStackTrace();
         } finally {
