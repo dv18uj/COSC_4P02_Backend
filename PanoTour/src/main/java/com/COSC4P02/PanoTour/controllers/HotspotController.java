@@ -32,7 +32,7 @@ public class HotspotController {
     }
 
     @GetMapping
-    public List<Hotspot> getHotspotsByPid (@RequestParam int pid) {
+    public List<Hotspot> getHotspotsByPid (@RequestParam(value = "pid") int pid) {
         return HotspotDAO.getHotspotsByPid(pid);
     }
 }

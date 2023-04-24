@@ -3,23 +3,21 @@ package com.COSC4P02.PanoTour.entities;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
-
-import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 
-@Repository("Hotspots")
-public class HotspotDAO {
+@Repository("Panoview")
+public class PanoviewDAO {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("PanoTour");
-    public boolean addHotspot(Hotspot hotspot) {
+
+    public boolean addPanoview(Panoview panoview) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean persisted = true;
         try {
             entityTransaction = em.getTransaction();
             entityTransaction.begin();
-            em.persist(hotspot);
+            em.persist(panoview);
             entityTransaction.commit();
         } catch (Exception exception) {
             if (entityTransaction != null) {
@@ -32,24 +30,24 @@ public class HotspotDAO {
         return persisted;
     }
 
-    public static List<Hotspot> getHotspotsByPid(int pid) {
+    public Optional<Panoview> getPanoviewByPid(int pid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT u FROM Hotspot u WHERE u.pid=:PID";
-        TypedQuery<Hotspot> tq = em.createQuery(query, Hotspot.class);
+        String query = "SELECT p FROM Panoview p WHERE p.pid = :PID";
+        TypedQuery<Panoview> tq = em.createQuery(query, Panoview.class);
         tq.setParameter("PID", pid);
-        List<Hotspot> hotspots = Collections.emptyList();
 
-        try{
-            hotspots = tq.getResultList();
+        Optional<Panoview> panoview = Optional.empty();
+        try {
+            panoview = Optional.of(tq.getSingleResult());
         } catch (NoResultException exception) {
-            exception.printStackTrace();
+            /*exception.printStackTrace();*/
         } finally {
             em.close();
         }
-        return hotspots;
+        return panoview;
     }
 
-    public boolean deleteHotspot(Hotspot hotspot) {
+    public boolean deletePanoview(Panoview panoview) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean deleted = true;
@@ -57,7 +55,7 @@ public class HotspotDAO {
         try {
             entityTransaction = em.getTransaction();
             entityTransaction.begin();
-            em.remove(em.contains(hotspot) ? hotspot : em.merge(hotspot));
+            em.remove(em.contains(panoview) ? panoview : em.merge(panoview));
             entityTransaction.commit();
         } catch (Exception e) {
             if (entityTransaction != null) {

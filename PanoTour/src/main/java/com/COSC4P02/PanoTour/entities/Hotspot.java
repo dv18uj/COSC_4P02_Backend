@@ -15,26 +15,38 @@ public class Hotspot implements Serializable
     private int hid;
 
     //The foreign key of the project
-    @Column(name = "sid", nullable = false)
-    private int sid;
+    @Column(name = "pid", nullable = false)
+    private int pid;
 
     //The foreign key of the project
     @Column(name = "oid", nullable = false)
     private int oid;
 
-    @Column(name = "x", nullable = false)
-    private int x;
+    @Column(name = "px", nullable = false)
+    private int px;
 
-    @Column(name = "y", nullable = false)
-    private int y;
+    @Column(name = "py", nullable = false)
+    private int py;
 
-    @Column(name = "z", nullable = false)
-    private int z;
+    @Column(name = "pz", nullable = false)
+    private int pz;
+
+    @Column(name = "rx", nullable = false)
+    private int rx;
+
+    @Column(name = "ry", nullable = false)
+    private int ry;
+
+    @Column(name = "rz", nullable = false)
+    private int rz;
 
     public int getHid() { return hid; }
     public int getOid() { return oid; }
-    public int getSid() { return sid; }
-    public int getX() { return x; }
-    public int getY() { return y; }
-    public int getZ() { return z; }
+    public int getPid() { return pid; }
+    public int getPx() { return px; }
+    public int getPy() { return py; }
+    public int getPz() { return pz; }
+    public int getRx() { return rx; }
+    public int getRy() { return ry; }
+    public int getRz() { return rz; }
 }
