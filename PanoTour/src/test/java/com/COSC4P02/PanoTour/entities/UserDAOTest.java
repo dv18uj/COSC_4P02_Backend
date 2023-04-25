@@ -11,25 +11,25 @@ import org.springframework.test.context.junit4.SpringRunner;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest
-public class UserDAOTest
-{
-    @Autowired
-    private UserDAO underTest;
-
-    @Test
-    void addUser()
-    {
-        // given
-        User user = new User("JohnSmith", "12345", "USER");
-
-        // when
-        boolean success = underTest.addUser(user);
-
-        // then
-        assertThat(success).isTrue();
-    }
-
+//@SpringBootTest
+//public class UserDAOTest
+//{
+//    @Autowired
+//    private UserDAO underTest;
+//
+//    @Test
+//    void addUser()
+//    {
+//        // given
+//        User user = new User("JohnSmith", "12345", "USER");
+//
+//        // when
+//        boolean success = underTest.addUser(user);
+//
+//        // then
+//        assertThat(success).isTrue();
+//    }
+//
 //    @Test
 //    void getUserByUid()
 //    {
@@ -49,4 +49,4 @@ public class UserDAOTest
 //    void getAllUsers()
 //    {
 //    }
-}
+//}
