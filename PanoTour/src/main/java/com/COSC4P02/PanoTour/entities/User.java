@@ -6,13 +6,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user")
+@Table(name = "`user`") // "user" is a keyword in hibernate, must use grave accents or else tests will not run properly
 public class User implements Serializable
 {
     private static final long serialVersionUID = 338L;
 
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int uid;
 
     @Column(name = "name", nullable = false)
