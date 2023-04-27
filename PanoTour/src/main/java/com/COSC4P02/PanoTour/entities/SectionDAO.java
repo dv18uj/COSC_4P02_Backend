@@ -5,7 +5,8 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.*;
 
 import java.util.Optional;
-
+import java.util.List;
+import java.util.Collections;
 @Repository("Sections")
 public class SectionDAO {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
@@ -30,7 +31,7 @@ public class SectionDAO {
         }
         return persisted;
     }
-
+    //Return a section with the given LID
     public Optional<Section> getSectionBySid(int sid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT s FROM Section s WHERE s.sid = :SID";
@@ -48,6 +49,23 @@ public class SectionDAO {
         return section;
     }
 
+    // Returns the list of sections with a common LID
+    public static List<Section> getSectionsByLid(int lid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT s FROM Section s WHERE s.lid = :LID";
+        TypedQuery<Section> typedQuery = em.createQuery(query, Section.class);
+        typedQuery.setParameter("LID", lid);
+        List<Section> section = Collections.emptyList();
+
+        try{
+            section = typedQuery.getResultList();
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return section;
+    }
     public boolean deleteSection(Section section) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
