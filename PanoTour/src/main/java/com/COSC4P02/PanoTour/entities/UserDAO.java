@@ -10,11 +10,13 @@ import java.util.Optional;
 @Repository("Users")
 public class UserDAO
 {
-    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-            .createEntityManagerFactory("PanoTour");
+    //private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
+    //        .createEntityManagerFactory("PanoTour");
+    @PersistenceContext
+    EntityManager em;
 
     public boolean addUser(User user) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        //EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean persisted = true;
         try {
@@ -34,7 +36,7 @@ public class UserDAO
     }
 
     public Optional<User> getUserByUid(int uid) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        //EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT u FROM User u WHERE u.uid = :UID";
         TypedQuery<User> tq = em.createQuery(query, User.class);
         tq.setParameter("UID", uid);
@@ -51,7 +53,7 @@ public class UserDAO
     }
 
     public Optional<User> getUserByName(String name) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        //EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT u FROM User u WHERE u.name = :NAME";
         TypedQuery<User> tq = em.createQuery(query, User.class);
         tq.setParameter("NAME", name);
@@ -68,7 +70,7 @@ public class UserDAO
     }
 
     public boolean deleteUser(User user) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        //EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean deleted = true;
 
@@ -89,7 +91,7 @@ public class UserDAO
     }
 
     public List<User> getAllUsers() {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        //EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT u FROM User u WHERE u.uid IS NOT NULL";
         TypedQuery<User> typedQuery = em.createQuery(query, User.class);
         List<User> users = Collections.emptyList();
