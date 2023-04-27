@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import static com.COSC4P02.PanoTour.security.ApplicationUserRole.USER;
 import static com.COSC4P02.PanoTour.security.ApplicationUserRole.EMPLOYEE;
 import static com.COSC4P02.PanoTour.security.ApplicationUserRole.OWNER;
 
@@ -37,7 +38,7 @@ public class ApplicationUserDAOService implements ApplicationUserDAO {
     private List<ApplicationUser> getApplicationUsers() {
         List<ApplicationUser> applicationUsers = Lists.newArrayList(
                 new ApplicationUser(
-                        EMPLOYEE.getGrantedAuthorities(),
+                        USER.getGrantedAuthorities(),
                         passwordEncoder.encode("password"),
                         "employee",
                         true,

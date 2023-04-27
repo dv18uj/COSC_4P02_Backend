@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -22,21 +23,23 @@ public class PanoviewController {
         this.panoviewDAO = panoviewDAO;
     }
 
-
-    @PostMapping
-    @PreAuthorize("hasAuthority('museum:write')")
-    @ResponseBody
-    public int addPanoview(@RequestBody Panoview panoview) {
-        if (!panoviewDAO.addPanoview(panoview)) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "panoview Could Not Be Added");
-        }
-        return panoview.getSid();
-    }
-
     @GetMapping
     @PreAuthorize("hasAuthority('users:read')")
     public Optional<Panoview> getPanoview(@RequestParam(value = "sid") int sid) {
         return panoviewDAO.getPanoviewBySid(sid);
     }
 
+    @PostMapping
+    @ResponseBody
+    public int addPanoview(@RequestBody Panoview panoview) {
+        if (!panoviewDAO.addPanoview(panoview)) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Panoview Could Not Be Added");
+        }
+        return panoview.getPid();
+    }
+
+    @GetMapping
+    public Optional<Panoview> getPanoview(@RequestParam(value = "pid") int pid) {
+        return panoviewDAO.getPanoviewByPid(pid);
+    }
 }

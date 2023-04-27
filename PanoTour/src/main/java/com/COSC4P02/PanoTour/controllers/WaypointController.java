@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/waypoint")
 public class WaypointController {
@@ -29,4 +31,8 @@ public class WaypointController {
         return waypoint.getWid();
     }
 
+    @GetMapping
+    public List<Waypoint> getWaypointsByPid (@RequestParam(value = "pid") int pid) {
+        return WaypointDAO.getWaypointsByPid(pid);
+    }
 }

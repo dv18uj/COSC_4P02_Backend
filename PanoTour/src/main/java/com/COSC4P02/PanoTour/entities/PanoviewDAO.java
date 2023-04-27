@@ -7,9 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@Repository("Locations")
-public class PanoviewDAO
-{
+@Repository("Panoview")
+public class PanoviewDAO {
     private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
             .createEntityManagerFactory("PanoTour");
 
@@ -33,25 +32,7 @@ public class PanoviewDAO
         return persisted;
     }
 
-    public Optional<Panoview> getPanoviewBySid(int sid) {
-        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT s FROM Panoview s WHERE s.sid = :SID";
-        TypedQuery<Panoview> tq = em.createQuery(query, Panoview.class);
-        tq.setParameter("SID", sid);
-
-        Optional<Panoview> panoview = Optional.empty();
-        try {
-            panoview = Optional.of(tq.getSingleResult());
-} catch (NoResultException exception) {
-            /*exception.printStackTrace();*/
-        } finally {
-            em.close();
-        }
-        return panoview;
-    }
-
-    //Returns the list of panoviews with common Sid
-    public static List<Panoview> listPanoviewFromSid(int sid) {
+        public static List<Panoview> listPanoviewFromSid(int sid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT p FROM Panoview p WHERE p.sid = :SID";
         TypedQuery<Panoview> typedQuery = em.createQuery(query, Panoview.class);
@@ -67,6 +48,26 @@ public class PanoviewDAO
         }
         return panoview;
     }
+
+    public Optional<Panoview> getPanoviewByPid(int pid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT p FROM Panoview p WHERE p.pid = :PID";
+        TypedQuery<Panoview> tq = em.createQuery(query, Panoview.class);
+        tq.setParameter("PID", pid);
+
+        Optional<Panoview> panoview = Optional.empty();
+        try {
+            panoview = Optional.of(tq.getSingleResult());
+        } catch (NoResultException exception) {
+            /*exception.printStackTrace();*/
+        } finally {
+            em.close();
+        }
+        return panoview;
+    }
+
+    //Returns the list of panoviews with common Sid
+
     //Returns the first Pid in the list of Pids with a common SID
     public Optional<Panoview> getPanoviewFromSid(int sid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
@@ -79,13 +80,14 @@ public class PanoviewDAO
         try {
             panoview = Optional.of(tq.getSingleResult());
 } catch (NoResultException exception) {
-            /*exception.printStackTrace();*/
+   /*exception.printStackTrace();*/
         } finally {
             em.close();
         }
         return panoview;
     }
-    public static boolean deletePanoview(Panoview panoview) {
+
+    public boolean deletePanoview(Panoview panoview) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;
         boolean deleted = true;
