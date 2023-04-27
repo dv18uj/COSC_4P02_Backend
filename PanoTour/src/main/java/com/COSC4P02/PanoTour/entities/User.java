@@ -31,11 +31,4 @@ public class User implements Serializable
     public void setPassword(String password) { this.password = new BCryptPasswordEncoder(10).encode(password); }
     public String getRole() { return role; }
     public void setRole(String roles) { this.role = roles; }
-
-    public User(String name, String password, String role)
-    {
-        this.name = name;
-        this.password = password;
-        this.role = role;
-    }
 }
