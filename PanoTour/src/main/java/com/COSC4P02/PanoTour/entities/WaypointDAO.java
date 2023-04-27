@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Repository("Waypoints")
@@ -29,6 +31,24 @@ public class WaypointDAO {
         }
         return persisted;
     }
+
+    public static List<Waypoint> getWaypointsByPid(int pid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT w FROM Waypoint w WHERE w.pid=:PID";
+        TypedQuery<Waypoint> tq = em.createQuery(query, Waypoint.class);
+        tq.setParameter("PID", pid);
+        List<Waypoint> waypoints = Collections.emptyList();
+
+        try{
+            waypoints = tq.getResultList();
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return waypoints;
+    }
+
     public boolean deleteWaypoint(Waypoint waypoint) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         EntityTransaction entityTransaction = null;

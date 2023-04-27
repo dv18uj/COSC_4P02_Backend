@@ -15,26 +15,37 @@ public class Waypoint implements Serializable
     private int wid;
 
     //The foreign key of the project
-    @Column(name = "sid", nullable = false)
-    private int sid;
-
-    //The foreign key of the project
     @Column(name = "pid", nullable = false)
     private int pid;
 
-    @Column(name = "x", nullable = false)
-    private int x;
+    @Column(name = "toPid", nullable = false)
+    private int toPid;
 
-    @Column(name = "y", nullable = false)
-    private int y;
+    @Column(name = "px", nullable = false)
+    private int px;
 
-    @Column(name = "z", nullable = false)
-    private int z;
+    @Column(name = "py", nullable = false)
+    private int py;
+
+    @Column(name = "pz", nullable = false)
+    private int pz;
+
+    @Column(name = "rx", nullable = false)
+    private int rx;
+
+    @Column(name = "ry", nullable = false)
+    private int ry;
+
+    @Column(name = "rz", nullable = false)
+    private int rz;
 
     public int getWid() { return wid; }
     public int getPid() { return pid; }
-    public int getSid() { return sid; }
-    public int getX() { return x; }
-    public int getY() { return y; }
-    public int getZ() { return z; }
+    public int getToPid() { return toPid;}
+    public int getPx() { return px; }
+    public int getPy() { return py; }
+    public int getPz() { return pz; }
+    public int getRx() { return rx; }
+    public int getRy() { return ry; }
+    public int getRz() { return rz; }
 }
