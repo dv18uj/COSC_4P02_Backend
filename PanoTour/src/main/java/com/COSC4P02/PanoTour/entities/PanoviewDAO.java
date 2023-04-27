@@ -71,9 +71,9 @@ public class PanoviewDAO {
     //Returns the first Pid in the list of Pids with a common SID
     public Optional<Panoview> getPanoviewFromSid(int sid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String query = "SELECT p FROM Panoview p WHERE p.sid = :SID LIMIT 1";
+        String query = "SELECT p FROM Panoview p WHERE p.sid = :SID";
 
-        TypedQuery<Panoview> tq = em.createQuery(query, Panoview.class);
+        TypedQuery<Panoview> tq = em.createQuery(query, Panoview.class).setMaxResults(1);
         tq.setParameter("SID", sid);
 
         Optional<Panoview> panoview = Optional.empty();

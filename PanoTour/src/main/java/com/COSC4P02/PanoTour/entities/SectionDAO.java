@@ -50,7 +50,7 @@ public class SectionDAO {
     }
 
     // Returns the list of sections with a common LID
-    public static List<Section> getSectionsByLid(int lid) {
+    public List<Section> getSectionsFromLid(int lid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT s FROM Section s WHERE s.lid = :LID";
         TypedQuery<Section> typedQuery = em.createQuery(query, Section.class);

@@ -23,10 +23,10 @@ public class PanoviewController {
         this.panoviewDAO = panoviewDAO;
     }
 
-    @GetMapping
+    @GetMapping(path= "fromSid")
     @PreAuthorize("hasAuthority('users:read')")
-    public Optional<Panoview> getPanoview(@RequestParam(value = "sid") int sid) {
-        return panoviewDAO.getPanoviewBySid(sid);
+    public Optional<Panoview> getPanoviewFromSid(@RequestParam(value = "sid") int sid) {
+        return panoviewDAO.getPanoviewFromSid(sid);
     }
 
     @PostMapping
@@ -39,6 +39,7 @@ public class PanoviewController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('users:read')")
     public Optional<Panoview> getPanoview(@RequestParam(value = "pid") int pid) {
         return panoviewDAO.getPanoviewByPid(pid);
     }

@@ -10,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -38,5 +39,12 @@ public class SectionController {
     public Optional<Section> getSection(@RequestParam(value = "sid") int sid) {
         return sectionDAO.getSectionBySid(sid);
     }
+
+    @GetMapping(path = "fromLid")
+    @PreAuthorize("hasAuthority('users:read')")
+    public List<Section> getSectionsfromLid(@RequestParam(value="lid") int lid){
+        return sectionDAO.getSectionsFromLid(lid);
+    }
+
 
 }
