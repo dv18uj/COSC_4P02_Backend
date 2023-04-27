@@ -10,8 +10,8 @@ import java.util.Optional;
 @Repository("Users")
 public class UserDAO
 {
-    //private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
-    //        .createEntityManagerFactory("PanoTour");
+//    private static final EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence
+//            .createEntityManagerFactory("PanoTour");
     @PersistenceContext
     EntityManager em;
 
