@@ -6,6 +6,7 @@ import com.COSC4P02.PanoTour.entities.PanoviewDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,6 +23,11 @@ public class PanoviewController {
         this.panoviewDAO = panoviewDAO;
     }
 
+    @GetMapping(path= "fromSid")
+    @PreAuthorize("hasAuthority('users:read')")
+    public Optional<Panoview> getPanoviewFromSid(@RequestParam(value = "sid") int sid) {
+        return panoviewDAO.getPanoviewFromSid(sid);
+    }
 
     @PostMapping
     @ResponseBody
@@ -33,6 +39,7 @@ public class PanoviewController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('users:read')")
     public Optional<Panoview> getPanoview(@RequestParam(value = "pid") int pid) {
         return panoviewDAO.getPanoviewByPid(pid);
     }
