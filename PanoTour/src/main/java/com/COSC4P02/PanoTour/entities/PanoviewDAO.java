@@ -3,6 +3,8 @@ package com.COSC4P02.PanoTour.entities;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 @Repository("Panoview")
@@ -30,11 +32,49 @@ public class PanoviewDAO {
         return persisted;
     }
 
+    public static List<Panoview> listPanoviewFromSid(int sid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT p FROM Panoview p WHERE p.sid = :SID";
+        TypedQuery<Panoview> typedQuery = em.createQuery(query, Panoview.class);
+        typedQuery.setParameter("SID", sid);
+        List<Panoview> panoview = Collections.emptyList();
+
+        try{
+        panoview = typedQuery.getResultList();
+        } catch (NoResultException exception) {
+            exception.printStackTrace();
+        } finally {
+            em.close();
+        }
+        return panoview;
+    }
+
     public Optional<Panoview> getPanoviewByPid(int pid) {
         EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
         String query = "SELECT p FROM Panoview p WHERE p.pid = :PID";
         TypedQuery<Panoview> tq = em.createQuery(query, Panoview.class);
         tq.setParameter("PID", pid);
+
+        Optional<Panoview> panoview = Optional.empty();
+        try {
+            panoview = Optional.of(tq.getSingleResult());
+        } catch (NoResultException exception) {
+            /*exception.printStackTrace();*/
+        } finally {
+            em.close();
+        }
+        return panoview;
+    }
+
+    //Returns the list of panoviews with common Sid
+
+    //Returns the first Pid in the list of Pids with a common SID
+    public Optional<Panoview> getPanoviewFromSid(int sid) {
+        EntityManager em = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String query = "SELECT p FROM Panoview p WHERE p.sid = :SID";
+
+        TypedQuery<Panoview> tq = em.createQuery(query, Panoview.class).setMaxResults(1);
+        tq.setParameter("SID", sid);
 
         Optional<Panoview> panoview = Optional.empty();
         try {
