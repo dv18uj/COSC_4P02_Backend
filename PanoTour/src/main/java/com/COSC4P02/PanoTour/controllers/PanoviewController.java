@@ -40,7 +40,7 @@ public class PanoviewController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('users:read')")
+    @PreAuthorize("hasAuthority('museum:read')")
     public Optional<Panoview> getPanoview(@RequestParam(value = "pid") int pid) {
         return panoviewDAO.getPanoviewByPid(pid);
     }
