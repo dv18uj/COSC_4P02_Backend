@@ -39,7 +39,15 @@ public class ApplicationUserDAOService implements ApplicationUserDAO {
         List<ApplicationUser> applicationUsers = Lists.newArrayList(
                 new ApplicationUser(
                         USER.getGrantedAuthorities(),
-                        passwordEncoder.encode("password"),
+                        passwordEncoder.encode("user123@"),
+                        "user123@",
+                        true,
+                        true,
+                        true,
+                        true),
+                new ApplicationUser(
+                        EMPLOYEE.getGrantedAuthorities(),
+                        passwordEncoder.encode("emp1812NOTL"),
                         "employee",
                         true,
                         true,
@@ -47,8 +55,8 @@ public class ApplicationUserDAOService implements ApplicationUserDAO {
                         true),
                 new ApplicationUser(
                         OWNER.getGrantedAuthorities(),
-                        passwordEncoder.encode("root"),
-                        "root",
+                        passwordEncoder.encode("ownerNOTL2023"),
+                        "owner",
                         true,
                         true,
                         true,
