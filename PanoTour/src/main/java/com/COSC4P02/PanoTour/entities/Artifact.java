@@ -63,6 +63,8 @@ public class Artifact implements Serializable {
 
     public Date getDate() { return date; }
 
+    public String getSubjects() { return subjects;}
+
     public String getDescription() { return description; }
 
     public String getPeople() { return people; }
