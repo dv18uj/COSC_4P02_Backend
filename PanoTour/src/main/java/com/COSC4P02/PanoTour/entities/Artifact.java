@@ -17,6 +17,9 @@ public class Artifact implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int oid;
 
+    @Column(name="sid", nullable = false)
+    private int sid;
+
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -48,9 +51,11 @@ public class Artifact implements Serializable {
     private String studio;
 
     @Column(name = "number_Images", nullable = false)
-    private int numberOfImages;
+    private int number_images;
 
     public int getOid() { return oid; }
+
+    public int getSid() { return sid; }
 
     public String getUrl() { return url; }
 
@@ -58,7 +63,9 @@ public class Artifact implements Serializable {
 
     public Date getDate() { return date; }
 
-    public String getDesc() { return description; }
+    public String getSubjects() { return subjects;}
+
+    public String getDescription() { return description; }
 
     public String getPeople() { return people; }
 
@@ -70,7 +77,7 @@ public class Artifact implements Serializable {
 
     public String getStudio() { return studio; }
 
-    public int getNumberOfImages() {
-        return numberOfImages;
+    public int getNumber_images() {
+        return number_images;
     }
 }
