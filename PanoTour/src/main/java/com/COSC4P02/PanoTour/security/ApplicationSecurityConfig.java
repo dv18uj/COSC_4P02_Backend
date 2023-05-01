@@ -44,7 +44,6 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/api/user/**").hasRole(OWNER.name())
                 .anyRequest()
                 .authenticated()
                 .and()
