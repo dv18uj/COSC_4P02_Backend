@@ -24,12 +24,13 @@ public class PanoviewController {
     }
 
     @GetMapping(path= "fromSid")
-    @PreAuthorize("hasAuthority('users:read')")
+    @PreAuthorize("hasAuthority('museum:read')")
     public Optional<Panoview> getPanoviewFromSid(@RequestParam(value = "sid") int sid) {
         return panoviewDAO.getPanoviewFromSid(sid);
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('museum:write')")
     @ResponseBody
     public int addPanoview(@RequestBody Panoview panoview) {
         if (!panoviewDAO.addPanoview(panoview)) {
@@ -39,7 +40,7 @@ public class PanoviewController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('users:read')")
+    @PreAuthorize("hasAuthority('users:read')")
     public Optional<Panoview> getPanoview(@RequestParam(value = "pid") int pid) {
         return panoviewDAO.getPanoviewByPid(pid);
     }

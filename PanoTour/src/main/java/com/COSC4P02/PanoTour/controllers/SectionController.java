@@ -35,13 +35,13 @@ public class SectionController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('users:read')")
+    @PreAuthorize("hasAuthority('museum:read')")
     public Optional<Section> getSection(@RequestParam(value = "sid") int sid) {
         return sectionDAO.getSectionBySid(sid);
     }
 
     @GetMapping(path = "fromLid")
-    @PreAuthorize("hasAuthority('users:read')")
+    @PreAuthorize("hasAuthority('museum:read')")
     public List<Section> getSectionsfromLid(@RequestParam(value="lid") int lid){
         return sectionDAO.getSectionsFromLid(lid);
     }

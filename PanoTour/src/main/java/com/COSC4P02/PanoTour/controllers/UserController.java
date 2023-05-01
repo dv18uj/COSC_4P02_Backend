@@ -39,7 +39,7 @@ public class UserController
     }
 
     @PostMapping(path = "add")
-    @PreAuthorize("hasRole('ROLE_OWNER')")
+    @PreAuthorize("hasAuthority('users:write')")
     public void addUser(@RequestBody User user) {
         if (!userDAO.addUser(user)) {
             if (user.getName() == null || user.getPassword() == null ||  user.getRole() == null) {
@@ -54,6 +54,7 @@ public class UserController
 
     @GetMapping
     @CrossOrigin(origins="http://localhost:19006")
+    @PreAuthorize("hasAuthority('users:read')")
     public Optional<User> getUsers(@RequestParam(value = "uid") int uid) {
         return userDAO.getUserByUid(uid);
     }

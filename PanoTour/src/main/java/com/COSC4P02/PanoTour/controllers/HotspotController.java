@@ -6,6 +6,7 @@ import com.COSC4P02.PanoTour.entities.HotspotDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -23,6 +24,7 @@ public class HotspotController {
 
 
     @PostMapping
+    @PreAuthorize("hasAuthority('museum:write')")
     @ResponseBody
     public int addHotspot(@RequestBody Hotspot hotspot) {
         if (!hotspotDAO.addHotspot(hotspot)) {
@@ -32,6 +34,7 @@ public class HotspotController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('museum:read')")
     public List<Hotspot> getHotspotsByPid (@RequestParam(value = "pid") int pid) {
         return HotspotDAO.getHotspotsByPid(pid);
     }

@@ -54,6 +54,7 @@ public class LocationController
     }
 
     @GetMapping(path = "all")
+    @PreAuthorize("hasAuthority('museum:read')")
     public List<Location> getAllLocations() {
         return LocationDAO.getAllLocations();
     }
